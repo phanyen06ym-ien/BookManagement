@@ -1,0 +1,57 @@
+@model IEnumerable<BookManagement.Models.Book>
+
+@{
+    ViewData["Title"] = "Quản lý sách";
+}
+
+<h1>Quản lý sách</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm sách mới</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Năm xuất bản</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Author</td>
+                <td>@item.Price.ToString("N0") VNĐ</td>
+                <td>@item.Quantity</td>
+                <td>@item.PublishedYear</td>
+
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-warning btn-sm">
+                        Sửa
+                    </a>
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="btn btn-info btn-sm">
+                        Chi tiết
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger btn-sm">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
